@@ -164,4 +164,44 @@ class LinkedListItemTest < Test::Unit::TestCase
     end
   end
 
+#!-- Tests I've written
+
+  def test_26_index_returns_fixnum
+    ll1 = LinkedList.new(:peanut, :butter, :jelly)
+    ll2 = LinkedList.new('a', 'couple', 'of', 'strings' )
+    ll3 = LinkedList.new( Array.new, Hash.new, Object.new )
+    assert_equal Fixnum, ll1.index(:butter).class 
+    assert_equal Fixnum, ll2.index('strings').class 
+    assert_equal Fixnum, ll3.index([]).class 
+  end
+
+  def test_27_index_returns_fist_last_and_correct_number
+    ll = LinkedList.new(:zero, :one, :two, :three, :four, :five, :six)
+  
+    assert_equal 0, ll.index(:zero) 
+    assert_equal 2, ll.index(:two) 
+    assert_equal 6, ll.index(:six)
+  end
+
+  def test_28_index_return_nil_if_nothing_matches
+    ll = LinkedList.new(:zero, :one, :two, :three, :four, :five, :six)
+
+    assert_equal nil, ll.index('test')
+    assert_equal nil, ll.index('one')
+  end
+
+  def test_29_wtf_you_doin_indexing_empty_lists?
+    ll = LinkedList.new
+
+    assert_raise IndexError do 
+      ll.index('treasure')
+    end
+  end
+
+  def test_30_index_returns_first_match
+    ll = LinkedList.new(1, 2, 'fizz', 4, 'buzz', 'fizz', 7, 8, 'fizz', 'buzz')
+    
+    assert_equal 2, ll.index('fizz')
+    assert_equal 4, ll.index('buzz')
+  end
 end

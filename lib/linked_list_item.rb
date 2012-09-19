@@ -19,3 +19,5 @@ class LinkedListItem
     @next_list_item == nil
   end
 end
+
+
